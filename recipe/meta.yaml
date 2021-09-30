@@ -32,7 +32,8 @@ requirements:
   host:
     - python
     - pip
-    - openssl  # [not win]
+    - openssl  # [linux]
+    - libiconv # [osx]
   run:
     - python
 
