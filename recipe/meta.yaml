@@ -23,6 +23,9 @@ build:
 
 requirements:
   build:
+    - git
+    - patch       # [unix]
+    - m2-patch    # [win]
     - python                                 # [build_platform != target_platform]
     - {{ compiler('c') }}  # [not win]
     - {{ compiler('rust') }}  # [not win]
