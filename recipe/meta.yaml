@@ -33,7 +33,7 @@ requirements:
     - python
     - pip
     - openssl  # [linux]
-    - libiconv # [osx]
+    - libiconv # [osx and x86_64]
   run:
     - python
 
