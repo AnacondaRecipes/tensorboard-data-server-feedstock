@@ -1,7 +1,7 @@
 {% set name = "tensorboard-data-server" %}
-{% set version = "0.6.0" %}
+{% set version = "0.6.1" %}
 {% set _name = "tensorboard_data_server" %}
-{% set git_rev = "1d4d904c1cc69ccdd7ed59f8539624eeb5c7a831" %}
+{% set git_rev = "6acf0be88b5727e546dd64a8b9b12d790601d561" %}
 
 package:
   name: {{ name|lower }}
@@ -10,7 +10,7 @@ package:
 source:
   # data server versions are not tagged, so we have to use the ID of the relevant rev
   url: https://github.com/tensorflow/tensorboard/archive/{{ git_rev }}.zip
-  sha256: e17b02eb493cb11b92db11fea4ac75805a119e68def636b455dec69bdcca31ef
+  sha256: 712996fea67cea2a2bcc07debe46bebcecbac7b862f42d760cc3b2ed31f79a5a
   patches:
     - 0001-Do-not-try-to-remove-tmpdir-on-Windows.patch  # [win]
 
