@@ -26,6 +26,7 @@ requirements:
     - python                            # [build_platform != target_platform]
     - {{ compiler('c') }}               # [not win]
     - {{ compiler('rust') }}            # [not win]
+    - m2-patch                          # [win]
   host:
     - python
     - pip
