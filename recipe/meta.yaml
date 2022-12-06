@@ -29,7 +29,7 @@ requirements:
   host:
     - python
     - pip
-    - openssl  # [not (win or osx or linux-64)]
+    - openssl                           # [not (win or osx or linux-64)]
   run:
     - python
 
@@ -41,6 +41,7 @@ about:
   home: https://github.com/tensorflow/tensorboard
   license: Apache-2.0
   license_file: LICENSE
+  license_family: Apache
   summary: 'Data server for TensorBoard'
   dev_url: https://github.com/tensorflow/tensorboard/tree/master/tensorboard/data/server
 
