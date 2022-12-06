@@ -29,7 +29,7 @@ requirements:
   host:
     - python
     - pip
-    - openssl  # [not win]
+    - openssl  # [not (win or osx or linux-64)]
   run:
     - python
 
