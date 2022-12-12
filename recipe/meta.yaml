@@ -1,7 +1,7 @@
 {% set name = "tensorboard-data-server" %}
-{% set version = "0.6.0" %}
+{% set version = "0.6.1" %}
 {% set _name = "tensorboard_data_server" %}
-{% set git_rev = "1d4d904c1cc69ccdd7ed59f8539624eeb5c7a831" %}
+{% set git_rev = "6acf0be88b5727e546dd64a8b9b12d790601d561" %}
 
 package:
   name: {{ name|lower }}
@@ -10,44 +10,52 @@ package:
 source:
   # data server versions are not tagged, so we have to use the ID of the relevant rev
   url: https://github.com/tensorflow/tensorboard/archive/{{ git_rev }}.zip
-  sha256: e17b02eb493cb11b92db11fea4ac75805a119e68def636b455dec69bdcca31ef
+  sha256: 712996fea67cea2a2bcc07debe46bebcecbac7b862f42d760cc3b2ed31f79a5a
   patches:
     - 0001-Do-not-try-to-remove-tmpdir-on-Windows.patch  # [win]
 
 # Windows is currently unsupported, so we build an universal dummy wheel instead for Windows
 # See https://github.com/tensorflow/tensorboard/blob/348af4c/tensorboard/data/server/pip_package/build.py#L78-L86
 build:
+  skip: True  # [py<36]
   script_env:
     - WHEELNAME={{ _name }}-{{ version }}-py3-none-any.whl  # [win]
   number: 0
 
 requirements:
   build:
-    - git
-    - patch       # [unix]
-    - m2-patch    # [win]
-    - python                                 # [build_platform != target_platform]
-    - {{ compiler('c') }}  # [not win]
-    - {{ compiler('rust') }}  # [not win]
+    - python
+    - {{ compiler('c') }}               # [not win]
+    - {{ compiler('rust') }}            # [not win]
+    - m2-patch                          # [win]
   host:
     - python
     - pip
-    - openssl  # [linux]
-    - libiconv # [osx and x86_64]
+    - openssl                           # [not (win or osx or linux-64)]
   run:
     - python
 
 test:
   imports:
     - tensorboard_data_server
+  commands:
+    - pip check
+  requires:
+    - pip
 
 about:
   home: https://github.com/tensorflow/tensorboard
   license: Apache-2.0
   license_file: LICENSE
+  license_family: Apache
   summary: 'Data server for TensorBoard'
   dev_url: https://github.com/tensorflow/tensorboard/tree/master/tensorboard/data/server
 
 extra:
   recipe-maintainers:
     - mdraw
+  skip-lints:
+    - missing_description
+    - missing_license_url
+    - missing_doc_source_url
+    - missing_doc_url
