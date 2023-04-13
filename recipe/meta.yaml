@@ -1,23 +1,21 @@
 {% set name = "tensorboard-data-server" %}
-{% set version = "0.6.1" %}
+{% set version = "0.7.0" %}
 {% set _name = "tensorboard_data_server" %}
-{% set git_rev = "6acf0be88b5727e546dd64a8b9b12d790601d561" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  # data server versions are not tagged, so we have to use the ID of the relevant rev
-  url: https://github.com/tensorflow/tensorboard/archive/{{ git_rev }}.zip
-  sha256: 712996fea67cea2a2bcc07debe46bebcecbac7b862f42d760cc3b2ed31f79a5a
+  url: https://github.com/tensorflow/tensorboard/archive/refs/tags/data-server-v{{ version }}.tar.gz
+  sha256: 47f0b4edf434cedea351f60ad7ebe63b575cfd103fa19555b404e0e108c364cd
   patches:
     - 0001-Do-not-try-to-remove-tmpdir-on-Windows.patch  # [win]
 
 # Windows is currently unsupported, so we build an universal dummy wheel instead for Windows
-# See https://github.com/tensorflow/tensorboard/blob/348af4c/tensorboard/data/server/pip_package/build.py#L78-L86
+# See https://github.com/tensorflow/tensorboard/blob/data-server-v0.7.0/tensorboard/data/server/pip_package/build.py#L39-L43
 build:
-  skip: True  # [py<36]
+  skip: True  # [py<37]
   script_env:
     - WHEELNAME={{ _name }}-{{ version }}-py3-none-any.whl  # [win]
   number: 0
