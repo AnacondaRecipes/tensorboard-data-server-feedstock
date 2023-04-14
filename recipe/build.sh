@@ -20,12 +20,12 @@ if [[ "${target_platform}" == "linux-64" ]] || [[ "${target_platform}" == osx-* 
     mv $WHEEL_NAME ${NEW_WHEEL_NAME}
   fi
 
-  $PYTHON -m pip install --no-deps --ignore-installed -v $SRC_DIR/*.whl
+  $PYTHON -m pip install --no-deps --no-build-isolation --ignore-installed -v $SRC_DIR/*.whl
 
 else
 
   pushd tensorboard/data/server/pip_package
   ${PYTHON} build.py --universal --out-dir="${SRC_DIR}/"
-  ${PYTHON} -m pip install --no-deps --ignore-installed -v ${SRC_DIR}/*.whl
+  ${PYTHON} -m pip install --no-deps --no-build-isolation --ignore-installed -v ${SRC_DIR}/*.whl
 
 fi
