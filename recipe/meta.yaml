@@ -18,7 +18,7 @@ build:
   skip: True  # [py<37]
   script_env:
     - WHEELNAME={{ _name }}-{{ version }}-py3-none-any.whl  # [win]
-  number: 0
+  number: 1
 
 requirements:
   build:
