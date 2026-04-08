@@ -1,5 +1,5 @@
 {% set name = "tensorboard-data-server" %}
-{% set version = "0.7.0" %}
+{% set version = "0.7.2" %}
 {% set _name = "tensorboard_data_server" %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://github.com/tensorflow/tensorboard/archive/refs/tags/data-server-v{{ version }}.tar.gz
-  sha256: 47f0b4edf434cedea351f60ad7ebe63b575cfd103fa19555b404e0e108c364cd
+  sha256: 02a510803df83cc66564964a0087adc6e2aabcb0b7617b7258b80e3115624bdd
   patches:                                               # [win]
     - 0001-Do-not-try-to-remove-tmpdir-on-Windows.patch  # [win]
 
@@ -18,7 +18,7 @@ build:
   skip: True  # [py<37]
   script_env:
     - WHEELNAME={{ _name }}-{{ version }}-py3-none-any.whl  # [win]
-  number: 1
+  number: 0
 
 requirements:
   build:
