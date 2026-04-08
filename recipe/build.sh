@@ -12,7 +12,13 @@ if [[ "${target_platform}" == "linux-64" ]] || [[ "${target_platform}" == osx-* 
   cargo build --release
 
   pushd pip_package
-  $PYTHON build.py --out-dir="$SRC_DIR/" --server-binary=../target/release/rustboard
+  # Upstream defaults to manylinux_2_31 (Ubuntu 20.04). Conda's linux sysroot uses
+  # glibc 2.28, so pip rejects that wheel tag during install ("not a supported wheel").
+  if [[ "${target_platform}" == linux-* ]]; then
+    $PYTHON build.py --out-dir="$SRC_DIR/" --server-binary=../target/release/rustboard --platform manylinux_2_28
+  else
+    $PYTHON build.py --out-dir="$SRC_DIR/" --server-binary=../target/release/rustboard
+  fi
 
   if [[ "${target_platform}" == "osx-arm64" ]]; then
     WHEEL_NAME=$(ls $SRC_DIR/*.whl)
