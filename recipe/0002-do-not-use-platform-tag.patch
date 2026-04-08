@@ -1,0 +1,13 @@
+diff --git a/tensorboard/data/server/pip_package/build.py b/tensorboard/data/server/pip_package/build.py
+index 72a71ffb80..c3e92f5b73 100644
+--- a/tensorboard/data/server/pip_package/build.py
++++ b/tensorboard/data/server/pip_package/build.py
+@@ -100,7 +100,7 @@ def main():
+
+     os.chdir(tmpdir)
+     subprocess.run(
+-        [sys.executable, "setup.py", "bdist_wheel", "-p", platform_tag],
++        [sys.executable, "setup.py", "bdist_wheel"],
+         stdout=sys.stderr,
+         check=True,
+     )
