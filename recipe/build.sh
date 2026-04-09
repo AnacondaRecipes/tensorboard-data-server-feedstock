@@ -20,12 +20,6 @@ if [[ "${target_platform}" == "linux-64" ]] || [[ "${target_platform}" == osx-* 
     $PYTHON build.py --out-dir="$SRC_DIR/" --server-binary=../target/release/rustboard
   fi
 
-  if [[ "${target_platform}" == "osx-arm64" ]]; then
-    WHEEL_NAME=$(ls $SRC_DIR/*.whl)
-    NEW_WHEEL_NAME=${WHEEL_NAME/macosx_10_9_x86_64/macosx_11_0_arm64}
-    mv $WHEEL_NAME ${NEW_WHEEL_NAME}
-  fi
-
   $PYTHON -m pip install --no-deps --no-build-isolation --ignore-installed -v $SRC_DIR/*.whl
 
 else
